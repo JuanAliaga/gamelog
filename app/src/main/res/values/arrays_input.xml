@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="nomeJogo">
+        <item>Cuphead</item>
+        <item>Dragon Ball Z Kakarot</item>
+        <item>Cyberpunk 2077</item>
+        <item>The Last of Us</item>
+        <item>Final Fantasy VII</item>
+        <item>Red Dead Redemption 2</item>
+        <item>Divinity Original Sin</item>
+        <item>Mafia: Definitive Edition</item>
+        <item>Crisis 3</item>
+        <item>Elden Ring</item>
+        <item>Super Mario Odyssey</item>
+    </string-array>
+    <integer-array name="plataformaJogo">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>2</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>2</item>
+        <item>3</item>
+    </integer-array>
+    <integer-array name="concluidoTodasConquistas">
+        <item>0</item>
+        <item>1</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
+    <integer-array name="statusJogo">
+        <item>0</item>
+        <item>2</item>
+        <item>2</item>
+        <item>0</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>2</item>
+        <item>0</item>
+        <item>0</item>
+        <item>0</item>
+    </integer-array>
+</resources>

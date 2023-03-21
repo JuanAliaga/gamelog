@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AdicionarJogoActivity">
+
+    <TextView
+        android:id="@+id/titleActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnAdicionarJogo"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.112"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
+
+    <EditText
+        android:id="@+id/addNomeJogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="174dp"
+        android:layout_marginBottom="598dp"
+        android:ems="10"
+        android:hint="@string/nome_jogo"
+        android:inputType="textPersonName"
+        android:textCursorDrawable="?attr/editTextBackground"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintStart_toStartOf="@+id/titleActivity"
+        app:layout_constraintTop_toBottomOf="@+id/titleActivity"
+        app:layout_constraintVertical_bias="0.058" />
+
+    <RadioGroup
+        android:id="@+id/plataforma"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="302dp"
+        android:layout_marginBottom="440dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/addNomeJogo"
+        app:layout_constraintTop_toBottomOf="@+id/addNomeJogo"
+        app:layout_constraintVertical_bias="0.13999999">
+
+
+        <RadioButton
+            android:id="@+id/plataformaPC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/plataformaPC"
+            android:textSize="10sp" />
+
+        <RadioButton
+            android:id="@+id/plataformaPS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/plataformaPS"
+            android:textSize="10sp" />
+
+        <RadioButton
+            android:id="@+id/plataformaXbox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/plataformaXBOX"
+            android:textSize="10sp" />
+
+        <RadioButton
+            android:id="@+id/plataformaNintendo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/plataformaNINTENDO"
+            android:textSize="10sp" />
+    </RadioGroup>
+
+    <Spinner
+        android:id="@+id/statusSpinner"
+        android:layout_width="205dp"
+        android:layout_height="28dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="346dp"
+        android:entries="@array/status"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textStatus"
+        app:layout_constraintTop_toBottomOf="@+id/textStatus"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <CheckBox
+        android:id="@+id/checkPlatinado"
+        android:layout_width="122dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/platinado"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="@+id/statusSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/statusSpinner" />
+
+    <TextView
+        android:id="@+id/textStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Status"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/plataforma"
+        app:layout_constraintTop_toBottomOf="@+id/plataforma"
+        app:layout_constraintVertical_bias="0.00999999" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="300dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/btnLimpar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="limparCampos"
+            android:text="@string/limparButton"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btnSalvar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="salvarJogo"
+            android:text="@string/salvarButton"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

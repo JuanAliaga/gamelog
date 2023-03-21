@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Gamelog</string>
+    <string name="Requerido">Campo não pode ser vazio!</string>
+    <string-array name="status">
+        <item>STATUS</item>
+        <item>BACKLOG</item>
+        <item>JOGANDO</item>
+        <item>CONCLUIDO</item>
+    </string-array>
+    <string name="platinado">100% Conquistas</string>
+    <string name="erroNomeVazio">Este Campo não pode ser vazio!</string>
+    <string name="erroPlataformaVazia">Selecionar uma plataforma</string>
+    <string name="erroStatusInvalido">Selecionar um status</string>
+    <string name="saveSucess">Jogo adicionado com sucesso</string>
+    <string name="limparCampos">Campos resetados</string>
+    <string name="SobreButton">Sobre</string>
+    <string name="btnAdicionarJogo">Adicionar Jogo</string>
+    <string name="Gamelog_project">GAMELOG - É um aplicativo para organizar seu backlog de jogos, afim de ajudar o jogador a se lembrar dos jogos já jogados e dos que irão ser jogados.</string>
+    <string name="adicionarButton">Adicionar</string>
+    <string name="editarButton">Editar</string>
+    <string name="excluirButton">Excluir</string>
+    <string name="salvarButton">Salvar</string>
+    <string name="limparButton">Limpar</string>
+    <string name="nome_jogo">Nome do Jogo</string>
+    <string name="isDarkMode">Trocar tema</string>
+    <string name="cancel">Cancelar</string>
+    <string name="deleteMsg">Você quer excluir</string>
+</resources>

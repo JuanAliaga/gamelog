@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">Gamelog</string>
+    <string name="plataformaPC" translatable="false">PC</string>
+    <string name="plataformaPS" translatable="false">Playstation</string>
+    <string name="plataformaXBOX" translatable="false">Xbox</string>
+    <string name="plataformaNINTENDO" translatable="false">Nintendo</string>
+    <string name="Requerido">" Field cannot be empty!"</string>
+    <string-array name="status">
+        <item>STATUS</item>
+        <item>BACKLOG</item>
+        <item>JOGANDO</item>
+        <item>CONCLUIDO</item>
+    </string-array>
+    <string name="platinado">100% Achievements</string>
+    <string name="erroNomeVazio">" This Field cannot be empty!"</string>
+    <string name="erroPlataformaVazia">Select a platform</string>
+    <string name="erroStatusInvalido">Select a status</string>
+    <string name="saveSucess">Game added successfully</string>
+    <string name="limparCampos">" Fields reset"</string>
+    <string name="SobreButton">About</string>
+    <string name="btnAdicionarJogo">Add Game</string>
+    <string name="UTFPR" translatable="false">UTFPR - Universidade Tecnológica Federal do Paraná</string>
+    <string name="MyName" translatable="false">Juan Felipe Aliaga</string>
+    <string name="email" translatable="false">juan.felipe.aliaga@gmail.com</string>
+    <string name="Gamelog_project">" GAMELOG - It is an application to organize your games backlog, in order to help the player to remember the games already played and the ones that will be played."</string>
+    <string name="adicionarButton">Add</string>
+    <string name="editarButton">Edit</string>
+    <string name="excluirButton">Delete</string>
+    <string name="salvarButton">Save</string>
+    <string name="limparButton">Clean</string>
+    <string name="nome_jogo">Game Name</string>
+    <string name="isDarkMode">Switch Theme</string>
+    <string name="isLightMode" translatable="false">Light Mode</string>
+    <string name="cancel">Cancel</string>
+    <string name="deleteMsg">"Do you want to delete "</string>
+</resources>
