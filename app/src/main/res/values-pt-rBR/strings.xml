@@ -25,5 +25,5 @@
     <string name="nome_jogo">Nome do Jogo</string>
     <string name="isDarkMode">Trocar tema</string>
     <string name="cancel">Cancelar</string>
-    <string name="deleteMsg">Você quer excluir</string>
+    <string name="deleteMsg">"Você quer excluir "</string>
 </resources>

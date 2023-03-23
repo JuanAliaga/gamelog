@@ -1,12 +1,23 @@
 package com.example.projetogamelog;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.Date;
 
+@Entity(tableName = "jogos")
 public class Jogo {
 
+    @PrimaryKey(autoGenerate = true)
     private Long id;
+
+    @NonNull
     private String nome;
+
+    @NonNull
     private PlataformaJogo plataforma;
+
     private StatusJogo status;
     private boolean concluidoTodasConquistas;
     private Date dataInicio;
@@ -26,8 +37,8 @@ public class Jogo {
         this.plataforma = plataforma;
         this.status = status;
         this.concluidoTodasConquistas = concluidoTodasConquistas;
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
+        //this.dataInicio = dataInicio;
+        //this.dataFim = dataFim;
     }
 
     public String getNome() {

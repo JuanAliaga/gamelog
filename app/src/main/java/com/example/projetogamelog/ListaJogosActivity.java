@@ -27,11 +27,12 @@ import com.example.projetogamelog.persistence.JogoDatabase;
 import com.example.projetogamelog.utils.UtilsGUI;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListaJogosActivity extends AppCompatActivity {
 
     ListView listViewJogos;
-    ArrayList<Jogo> jogos;
+    List<Jogo> jogos;
     JogoAdapter jogoAdapter;
 
     private ActionMode actionMode;
@@ -94,8 +95,8 @@ public class ListaJogosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_jogos);
 
-        JogoDatabase jogoDatabase = JogoDatabase.getInstance(this);
-        jogoDatabase.jogoDAO.loadList();
+        //JogoDatabase jogoDatabase = JogoDatabase.getInstance(this);
+        //jogoDatabase.jogoDAO.loadList();
 
 
 
@@ -202,9 +203,9 @@ public class ListaJogosActivity extends AppCompatActivity {
     }
 
     private void popularListaJogos() {
-        JogoDatabase jogoDatabase = JogoDatabase.getInstance(this);
+        JogoDatabase jogoDatabase = JogoDatabase.getDatabase(ListaJogosActivity.this);
 
-        jogos= jogoDatabase.jogoDAO.jogosList;
+        jogos= jogoDatabase.JogoDao().jogosAll();
         jogoAdapter = new JogoAdapter(this, jogos);
 
         listViewJogos.setAdapter(jogoAdapter);
@@ -226,7 +227,8 @@ public class ListaJogosActivity extends AppCompatActivity {
 
     private void excluirJogo(){
         Jogo jogo = jogos.get(posicaoSelecionada);
-        JogoDatabase jogoDatabase = JogoDatabase.getInstance(this);
+        JogoDatabase jogoDatabase = JogoDatabase.getDatabase(ListaJogosActivity.this);
+        //JogoDatabase jogoDatabase = JogoDatabase.getInstance(this);
 
         String msg = getString(R.string.deleteMsg) + jogo.getNome() + "?";
         DialogInterface.OnClickListener listener =
@@ -238,8 +240,9 @@ public class ListaJogosActivity extends AppCompatActivity {
                             case DialogInterface.BUTTON_POSITIVE:
 
 
-                                jogoDatabase.jogoDAO.deleteJogo(jogo);
-
+                                //jogoDatabase.jogoDAO.deleteJogo(jogo);
+                                jogoDatabase.JogoDao().delete(jogo);
+                                jogos.remove(jogo);
                                 jogoAdapter.notifyDataSetChanged();
                                 break;
 
@@ -262,7 +265,7 @@ public class ListaJogosActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        JogoDatabase jogoDatabase = new JogoDatabase(this);
+        JogoDatabase jogoDatabase = JogoDatabase.getDatabase(ListaJogosActivity.this);
         if(resultCode == Activity.RESULT_OK){
             Bundle bundle = data.getExtras();
 
@@ -281,11 +284,13 @@ public class ListaJogosActivity extends AppCompatActivity {
                     jogoAntigo.setPlataforma(jogo.getPlataforma());
                     jogoAntigo.setStatus(jogo.getStatus());
                     jogoAntigo.setConcluidoTodasConquistas(jogo.isConcluidoTodasConquistas());
-                    jogoDatabase.jogoDAO.updateJogo(jogoAntigo);
+                    jogoDatabase.JogoDao().update(jogoAntigo);
+                    //jogoDatabase.jogoDAO.updateJogo(jogoAntigo);
                     //posicaoSelecionada = -1;
                 }else{
                     jogos.add(jogo);
-                    jogoDatabase.jogoDAO.insertJogo(jogo);
+                    jogoDatabase.JogoDao().insert(jogo);
+                    //jogoDatabase.jogoDAO.insertJogo(jogo);
                 }
                 jogoAdapter.notifyDataSetChanged();
             }
