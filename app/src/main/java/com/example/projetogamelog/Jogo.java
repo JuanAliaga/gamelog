@@ -2,6 +2,7 @@ package com.example.projetogamelog;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
@@ -26,19 +27,21 @@ public class Jogo {
     public Jogo() {
     }
 
+   @Ignore
     public Jogo(String nome, PlataformaJogo plataforma) {
         this.nome = nome;
         this.plataforma = plataforma;
         this.status = StatusJogo.BACKLOG;
     }
 
+    @Ignore
     public Jogo(String nome, PlataformaJogo plataforma, StatusJogo status, boolean concluidoTodasConquistas, Date dataInicio, Date dataFim) {
         this.nome = nome;
         this.plataforma = plataforma;
         this.status = status;
         this.concluidoTodasConquistas = concluidoTodasConquistas;
-        //this.dataInicio = dataInicio;
-        //this.dataFim = dataFim;
+        this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
     }
 
     public String getNome() {

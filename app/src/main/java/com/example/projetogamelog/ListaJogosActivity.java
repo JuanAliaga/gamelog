@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.view.ActionMode;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -25,8 +24,7 @@ import android.widget.Toast;
 
 import com.example.projetogamelog.persistence.JogoDatabase;
 import com.example.projetogamelog.utils.UtilsGUI;
-
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ListaJogosActivity extends AppCompatActivity {
@@ -94,10 +92,6 @@ public class ListaJogosActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_jogos);
-
-        //JogoDatabase jogoDatabase = JogoDatabase.getInstance(this);
-        //jogoDatabase.jogoDAO.loadList();
-
 
 
         listViewJogos = findViewById(R.id.listViewJogos);
@@ -220,15 +214,12 @@ public class ListaJogosActivity extends AppCompatActivity {
     }
 
     public void adicionarJogo(){
-        //Intent intent = new Intent(ListaJogosActivity.this, MainActivity.class);
         AdicionarJogoActivity.novoJogo(this);
-        //startActivityForResult(intent,1);
     }
 
     private void excluirJogo(){
         Jogo jogo = jogos.get(posicaoSelecionada);
         JogoDatabase jogoDatabase = JogoDatabase.getDatabase(ListaJogosActivity.this);
-        //JogoDatabase jogoDatabase = JogoDatabase.getInstance(this);
 
         String msg = getString(R.string.deleteMsg) + jogo.getNome() + "?";
         DialogInterface.OnClickListener listener =
@@ -238,9 +229,6 @@ public class ListaJogosActivity extends AppCompatActivity {
 
                         switch(which){
                             case DialogInterface.BUTTON_POSITIVE:
-
-
-                                //jogoDatabase.jogoDAO.deleteJogo(jogo);
                                 jogoDatabase.JogoDao().delete(jogo);
                                 jogos.remove(jogo);
                                 jogoAdapter.notifyDataSetChanged();
@@ -271,12 +259,18 @@ public class ListaJogosActivity extends AppCompatActivity {
 
             if(bundle != null){
                 Jogo jogo = new Jogo();
-                PlataformaJogo[] plataformaJogos= PlataformaJogo.values();
-                StatusJogo[] statusJogos=StatusJogo.values();
                 jogo.setNome(bundle.getString(AdicionarJogoActivity.NOMEJOGO));
                 jogo.setPlataforma(PlataformaJogo.valueOf(bundle.getString(AdicionarJogoActivity.PLATAFORMAJOGO)));
                 jogo.setStatus(StatusJogo.valueOf(bundle.getString(AdicionarJogoActivity.STATUSJOGO)));
                 jogo.setConcluidoTodasConquistas(Boolean.parseBoolean(bundle.getString(AdicionarJogoActivity.TODASCONQUISTAS)));
+                long time = bundle.getLong(AdicionarJogoActivity.DATAINICIO);
+                long timeEnd= bundle.getLong(AdicionarJogoActivity.DATAFIM);
+                if(time != 0){
+                    jogo.setDataInicio(new Date(time));
+                }
+                if(timeEnd != 0){
+                    jogo.setDataFim(new Date(timeEnd));
+                }
 
                 if(requestCode == AdicionarJogoActivity.EDITARJOGO){
                     Jogo jogoAntigo = jogos.get(posicaoSelecionada);
@@ -284,13 +278,12 @@ public class ListaJogosActivity extends AppCompatActivity {
                     jogoAntigo.setPlataforma(jogo.getPlataforma());
                     jogoAntigo.setStatus(jogo.getStatus());
                     jogoAntigo.setConcluidoTodasConquistas(jogo.isConcluidoTodasConquistas());
+                    jogoAntigo.setDataInicio(jogo.getDataInicio());
+                    jogoAntigo.setDataFim(jogo.getDataFim());
                     jogoDatabase.JogoDao().update(jogoAntigo);
-                    //jogoDatabase.jogoDAO.updateJogo(jogoAntigo);
-                    //posicaoSelecionada = -1;
                 }else{
                     jogos.add(jogo);
                     jogoDatabase.JogoDao().insert(jogo);
-                    //jogoDatabase.jogoDAO.insertJogo(jogo);
                 }
                 jogoAdapter.notifyDataSetChanged();
             }

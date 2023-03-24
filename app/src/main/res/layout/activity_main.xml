@@ -30,6 +30,7 @@
         android:ems="10"
         android:hint="@string/nome_jogo"
         android:inputType="textPersonName"
+        android:minHeight="48dp"
         android:textCursorDrawable="?attr/editTextBackground"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -86,7 +87,7 @@
     <Spinner
         android:id="@+id/statusSpinner"
         android:layout_width="205dp"
-        android:layout_height="28dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="100dp"
         android:layout_marginBottom="346dp"
         android:entries="@array/status"
@@ -100,7 +101,7 @@
     <CheckBox
         android:id="@+id/checkPlatinado"
         android:layout_width="122dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:layout_marginTop="8dp"
         android:text="@string/platinado"
         android:textSize="10sp"
@@ -111,7 +112,7 @@
         android:id="@+id/textStatus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Status"
+        android:text="@string/status"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -121,10 +122,55 @@
         app:layout_constraintTop_toBottomOf="@+id/plataforma"
         app:layout_constraintVertical_bias="0.00999999" />
 
+    <TextView
+        android:id="@+id/txtDataInicioTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/start_date"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/checkPlatinado"
+        app:layout_constraintTop_toBottomOf="@+id/checkPlatinado" />
+
+    <TextView
+        android:id="@+id/txtDataFimTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/end_date"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/txtDateInicio"
+        app:layout_constraintTop_toBottomOf="@+id/checkPlatinado" />
+
+    <EditText
+        android:id="@+id/txtDateInicio"
+        android:layout_width="140dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintStart_toStartOf="@+id/checkPlatinado"
+        app:layout_constraintTop_toBottomOf="@+id/txtDataInicioTitle"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+
+    <EditText
+        android:id="@+id/txtDateFim"
+        android:layout_width="140dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:ems="10"
+        android:inputType="date"
+        app:layout_constraintStart_toStartOf="@+id/txtDataFimTitle"
+        app:layout_constraintTop_toBottomOf="@+id/txtDataFimTitle"
+        tools:ignore="DuplicateSpeakableTextCheck" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="400dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -148,6 +194,7 @@
             android:onClick="salvarJogo"
             android:text="@string/salvarButton"
             android:visibility="invisible" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

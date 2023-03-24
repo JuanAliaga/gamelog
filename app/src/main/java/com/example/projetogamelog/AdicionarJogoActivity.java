@@ -5,24 +5,35 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AdicionarJogoActivity extends AppCompatActivity {
+import com.example.projetogamelog.utils.ConvertDate;
+
+import java.util.Calendar;
+import java.util.Date;
+
+public class AdicionarJogoActivity extends AppCompatActivity{
+
 
     private EditText editNomeJogo;
     private RadioGroup radioPlataform;
     private Spinner spinnerStatus;
     private CheckBox checkPlatina;
     private TextView titleActivity;
+    private EditText txtDateInicio;
+    private EditText txtDateFim;
 
     public static final String MODO = "MODO";
 
@@ -33,11 +44,19 @@ public class AdicionarJogoActivity extends AppCompatActivity {
     private int plataformaAntigo;
     private int statusAntigo;
     private boolean checkPlatinaAntigo;
+    private Date dateInicioAntigo;
+    private Date dateFimAntigo;
 
     public static final String NOMEJOGO = "NOMEJOGO";
     public static final String PLATAFORMAJOGO = "PLATAFORMAJOGO";
     public static final String STATUSJOGO = "STATUSJOGO";
     public static final String TODASCONQUISTAS = "TODASCONQUISTAS";
+    public static final String DATAINICIO="DATAINICIO";
+    public static final String DATAFIM ="DATAFIM" ;
+
+    Calendar calendarDataInicio;
+    Calendar calendarDataFim;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +73,62 @@ public class AdicionarJogoActivity extends AppCompatActivity {
         spinnerStatus = findViewById(R.id.statusSpinner);
         checkPlatina = findViewById(R.id.checkPlatinado);
         titleActivity = findViewById(R.id.titleActivity);
+        txtDateInicio = findViewById(R.id.txtDateInicio);
+        txtDateFim = findViewById(R.id.txtDateFim);
+        txtDateInicio.setFocusable(false);
+        txtDateFim.setFocusable(false);
+
+        calendarDataFim = Calendar.getInstance();
+        calendarDataInicio = Calendar.getInstance();
+        final int month = calendarDataInicio.get(Calendar.MONTH);
+        final int year = calendarDataInicio.get(Calendar.YEAR);
+        final int day = calendarDataInicio.get(Calendar.DAY_OF_MONTH);
+
+        txtDateInicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog picker = new DatePickerDialog(AdicionarJogoActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int month, int day) {
+
+                                calendarDataInicio.set(year, month, day);
+
+                                String dateString = ConvertDate.dateToString(calendarDataInicio.getTime());
+
+                                txtDateInicio.setText(dateString);
+                            }
+                        },
+                        year,
+                        month,
+                        day);
+                picker.show();
+                }
+            }
+        );
+
+        txtDateFim.setOnClickListener(new View.OnClickListener() {
+            @Override
+                public void onClick(View view) {
+                    DatePickerDialog pickerFim = new DatePickerDialog(AdicionarJogoActivity.this,
+                            new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int day) {
+
+                            calendarDataFim.set(year, month, day);
+
+                            String dateString = ConvertDate.dateToString(calendarDataFim.getTime());
+
+                            txtDateFim.setText(dateString);
+                        }
+                        },
+                            year,
+                            month,
+                            day);
+                    pickerFim.show();
+            }
+        }
+        );
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
@@ -70,6 +145,14 @@ public class AdicionarJogoActivity extends AppCompatActivity {
                 plataformaAntigo = bundle.getInt(PLATAFORMAJOGO);
                 statusAntigo = bundle.getInt(STATUSJOGO);
                 checkPlatinaAntigo = bundle.getBoolean(TODASCONQUISTAS);
+                dateInicioAntigo = new Date(bundle.getLong(DATAINICIO));
+                dateFimAntigo = new Date(bundle.getLong(DATAFIM));
+                if(dateInicioAntigo.getTime()!=0) {
+                    txtDateInicio.setText(ConvertDate.dateToString(dateInicioAntigo));
+                }
+                if(dateFimAntigo.getTime()!=0) {
+                    txtDateFim.setText(ConvertDate.dateToString(dateFimAntigo));
+                }
 
                 editNomeJogo.setText(nomeAntigoJogo);
                 radioPlataform.check(radioPlataform.getChildAt(plataformaAntigo).getId());
@@ -112,6 +195,7 @@ public class AdicionarJogoActivity extends AppCompatActivity {
         radioPlataform.clearCheck();
         spinnerStatus.setSelection(0);
         checkPlatina.setChecked(false);
+        txtDateInicio.setText(null);
         Toast.makeText(getBaseContext(),getString(R.string.limparCampos), Toast.LENGTH_LONG).show();
     }
 
@@ -138,6 +222,8 @@ public class AdicionarJogoActivity extends AppCompatActivity {
             intent.putExtra(PLATAFORMAJOGO,plataforma);
             intent.putExtra(STATUSJOGO,spinnerStatus.getSelectedItem().toString());
             intent.putExtra(TODASCONQUISTAS,String.valueOf(checkPlatina.isChecked()));
+            intent.putExtra(DATAINICIO,calendarDataInicio.getTimeInMillis());
+            intent.putExtra(DATAFIM,calendarDataFim.getTimeInMillis());
             Toast.makeText(getBaseContext(),getString(R.string.saveSucess), Toast.LENGTH_LONG).show();
             setResult(Activity.RESULT_OK,intent);
             finish();
@@ -171,6 +257,12 @@ public class AdicionarJogoActivity extends AppCompatActivity {
         intent.putExtra(PLATAFORMAJOGO,jogo.getPlataforma().getCodigo());
         intent.putExtra(STATUSJOGO,jogo.getStatus().getCodigo());
         intent.putExtra(TODASCONQUISTAS,jogo.isConcluidoTodasConquistas());
+        if(jogo.getDataInicio()!=null){
+            intent.putExtra(DATAINICIO, jogo.getDataInicio().getTime());
+        }
+        if(jogo.getDataFim() !=null){
+            intent.putExtra(DATAFIM, jogo.getDataFim().getTime());
+        }
 
 
         activity.startActivityForResult(intent, EDITARJOGO);
@@ -185,10 +277,10 @@ public class AdicionarJogoActivity extends AppCompatActivity {
         activity.startActivityForResult(intent, NOVOJOGO);
     }
 
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         setResult(Activity.RESULT_CANCELED);
     }
+
 }
